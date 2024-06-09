@@ -7,10 +7,15 @@ import 'package:get/get.dart';
 
 import '../constant.dart';
 
-class OrderCard extends StatelessWidget {
+class OrderCard extends StatefulWidget {
   OrderCard({super.key});
 
-  final CustomerInfoController controller = Get.put(CustomerInfoController());
+  @override
+  State<OrderCard> createState() => _OrderCardState();
+}
+
+class _OrderCardState extends State<OrderCard> {
+  bool show = false;
 
   TextStyle columnTextStyle = const TextStyle(
       fontWeight: FontWeight.w500, fontSize: 14, color: Colors.black);
@@ -202,128 +207,128 @@ class OrderCard extends StatelessWidget {
                     height: 1,
                     color: Color(0xfff9E9E9E),
                   ),
-                  Obx(
-                    () => GestureDetector(
-                      onTap: () {
-                        controller.updateValue();
-                      },
-                      child: Container(
-                        padding: EdgeInsets.symmetric(vertical: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  "assets/icons/customer.svg",
-                                  color: Colors.black,
-                                ),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                const Text(
-                                  "Customer info",
-                                  style: TextStyle(
-                                      fontSize: 14,
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        show = !show;
+                      });
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                "assets/icons/customer.svg",
+                                color: Colors.black,
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              const Text(
+                                "Customer info",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              show
+                                  ? const Icon(
+                                      Icons.arrow_drop_up,
                                       color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                controller.show.value
-                                    ? const Icon(
-                                        Icons.arrow_drop_up,
-                                        color: Colors.black,
-                                      )
-                                    : const Icon(Icons.arrow_drop_down),
-                              ],
-                            ),
-                          ],
-                        ),
+                                    )
+                                  : const Icon(Icons.arrow_drop_down),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
-                  Obx(
-                    () => controller.show.value
-                        ? Container(
-                            margin: const EdgeInsets.only(top: 15),
-                            width: double.infinity,
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Customer info",
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Nidhi Dobariya",
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        color: Color(0xfff625B71),
-                                      ),
+
+                  show
+                      ? Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          width: double.infinity,
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            // mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Customer info",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Nidhi Dobariya",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Color(0xfff625B71),
                                     ),
-                                    Text(
-                                      "6351865566",
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        color: Color(0xfff625B71),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Text(
-                                  "A -2 Parth Society  Ahemdabad",
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    color: Color(0xfff625B71),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Payment Mode",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                      ),
+                                  Text(
+                                    "6351865566",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: Color(0xfff625B71),
                                     ),
-                                    Text(
-                                      "Cash on delivery",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "A -2 Parth Society  Ahemdabad",
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: Color(0xfff625B71),
                                 ),
-                              ],
-                            ),
-                          )
-                        : Container(),
-                  )
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Payment Mode",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Cash on delivery",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                      : Container(),
+
                   //Under Drop down
                 ],
               ),
